@@ -20,11 +20,11 @@
 
 ## 🛠 ***Tech Stack***
 
-#### ***Frontend :*** *React + Vite + JavaScript*
+* #### ***Frontend :*** *React + Vite + JavaScript*
 
-#### ***Backend :*** *Node js + Express js*
+* #### ***Backend :*** *Node js + Express js*
 
-#### ***Styling :*** *Tailwindcss*
+* #### ***Styling :*** *Tailwindcss*
 
 
 ## 📂 ***Project Structure***
@@ -45,8 +45,8 @@ TriviaSwift/
 
 ## 🔮 ***Upcoming Features***
 
-#### **Leaderboard for high scores**
+* #### **Leaderboard for high scores**
 
-#### **API-based random questions**
+* #### **API-based random questions**
 
-#### **Difficulty levels**
+* #### **Difficulty levels**
