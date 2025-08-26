@@ -1,0 +1,137 @@
+[
+  {
+    "id": "1",
+    "question": "What is the capital of France?",
+    "options": ["Paris", "London", "Berlin", "Madrid"],
+    "correctAnswer": "Paris",
+    "category": "Geography",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T10:00:00.000Z"
+  },
+  {
+    "id": "2",
+    "question": "Which planet is known as the Red Planet?",
+    "options": ["Venus", "Mars", "Jupiter", "Saturn"],
+    "correctAnswer": "Mars",
+    "category": "Science",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T10:05:00.000Z"
+  },
+  {
+    "id": "3",
+    "question": "Who wrote 'Romeo and Juliet'?",
+    "options": ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"],
+    "correctAnswer": "William Shakespeare",
+    "category": "Literature",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T10:10:00.000Z"
+  },
+  {
+    "id": "4",
+    "question": "What is the chemical symbol for gold?",
+    "options": ["Go", "Gd", "Au", "Ag"],
+    "correctAnswer": "Au",
+    "category": "Science",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T10:15:00.000Z"
+  },
+  {
+    "id": "5",
+    "question": "Which ocean is the largest?",
+    "options": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+    "correctAnswer": "Pacific Ocean",
+    "category": "Geography",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T10:20:00.000Z"
+  },
+  {
+    "id": "6",
+    "question": "What year did World War II end?",
+    "options": ["1943", "1945", "1947", "1950"],
+    "correctAnswer": "1945",
+    "category": "History",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T10:25:00.000Z"
+  },
+  {
+    "id": "7",
+    "question": "Who painted the Mona Lisa?",
+    "options": ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Michelangelo"],
+    "correctAnswer": "Leonardo da Vinci",
+    "category": "Art",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T10:30:00.000Z"
+  },
+  {
+    "id": "8",
+    "question": "What is the hardest natural substance on Earth?",
+    "options": ["Gold", "Iron", "Diamond", "Platinum"],
+    "correctAnswer": "Diamond",
+    "category": "Science",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T10:35:00.000Z"
+  },
+  {
+    "id": "9",
+    "question": "Which element has the atomic number 1?",
+    "options": ["Oxygen", "Hydrogen", "Carbon", "Nitrogen"],
+    "correctAnswer": "Hydrogen",
+    "category": "Science",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T10:40:00.000Z"
+  },
+  {
+    "id": "10",
+    "question": "What is the capital of Australia?",
+    "options": ["Sydney", "Melbourne", "Canberra", "Perth"],
+    "correctAnswer": "Canberra",
+    "category": "Geography",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T10:45:00.000Z"
+  },
+  {
+    "id": "11",
+    "question": "Who discovered penicillin?",
+    "options": ["Marie Curie", "Alexander Fleming", "Louis Pasteur", "Robert Koch"],
+    "correctAnswer": "Alexander Fleming",
+    "category": "Science",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T10:50:00.000Z"
+  },
+  {
+    "id": "12",
+    "question": "What is the largest mammal in the world?",
+    "options": ["Elephant", "Blue Whale", "Giraffe", "Hippopotamus"],
+    "correctAnswer": "Blue Whale",
+    "category": "Science",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T10:55:00.000Z"
+  },
+  {
+    "id": "13",
+    "question": "Which language has the most native speakers?",
+    "options": ["English", "Spanish", "Mandarin Chinese", "Hindi"],
+    "correctAnswer": "Mandarin Chinese",
+    "category": "General Knowledge",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T11:00:00.000Z"
+  },
+  {
+    "id": "14",
+    "question": "What is the currency of Japan?",
+    "options": ["Yuan", "Won", "Yen", "Ringgit"],
+    "correctAnswer": "Yen",
+    "category": "Geography",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T11:05:00.000Z"
+  },
+  {
+    "id": "15",
+    "question": "Who was the first woman to win a Nobel Prize?",
+    "options": ["Marie Curie", "Rosalind Franklin", "Dorothy Hodgkin", "Barbara McClintock"],
+    "correctAnswer": "Marie Curie",
+    "category": "History",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T11:10:00.000Z"
+  }
+]
