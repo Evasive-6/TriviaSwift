@@ -18,7 +18,7 @@ const generateGameId = () => {
   return Date.now().toString();
 };
 
-module.exports = {
+export {
   shuffleArray,
   calculateAccuracy,
   generateGameId

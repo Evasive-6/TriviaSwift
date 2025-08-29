@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
+import fs from 'fs/promises';
+import path from 'path';
 const router = express.Router();
-const fs = require('fs').promises;
-const path = require('path');
 
 // Path to questions data file
 const questionsFilePath = path.join(__dirname, '../data/questions.json');
@@ -235,4 +235,4 @@ router.delete('/:gameId', async (req, res, next) => {
   }
 });
 
-module.exports = router;
+export default router;

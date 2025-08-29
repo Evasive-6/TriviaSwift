@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
+import Score from '../models/Score.js';
 const router = express.Router();
-const Score = require('../models/Score');
 
 // GET /api/scores - Get all scores sorted by score descending
 router.get('/', async (req, res, next) => {
@@ -137,4 +137,4 @@ router.get('/stats/summary', async (req, res, next) => {
   }
 });
 
-module.exports = router;
+export default router;
