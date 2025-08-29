@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const connectDB = async () => {
   try {
     // Use environment variable or default to local MongoDB
-    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/triviaswift';
+    const mongoURI = process.env.MONGODB_URI ;
     
     const conn = await mongoose.connect(mongoURI, {
       useNewUrlParser: true,
