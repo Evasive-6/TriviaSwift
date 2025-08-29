@@ -1,18 +1,19 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const path = require('path');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import path from 'path';
 
 // Import database connection
-const connectDB = require('./config/database');
+import connectDB from './config/database.js';
 
 // Import routes
-const questionRoutes = require('./routes/questions');
-const scoreRoutes = require('./routes/scores');
-const gameRoutes = require('./routes/game');
+import questionRoutes from './routes/questions.js';
+import scoreRoutes from './routes/scores.js';
+import gameRoutes from './routes/game.js';
+import userRoutes from './routes/users.js';
 
 // Import middleware
-const errorHandler = require('./middleware/errorHandler');
+import errorHandler from './middleware/errorHandler.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -26,12 +27,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve static files (for potential frontend build)
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(import.meta.dirname, '../public')));
 
 // API Routes
 app.use('/api/questions', questionRoutes);
 app.use('/api/scores', scoreRoutes);
 app.use('/api/game', gameRoutes);
+app.use('/api/users', userRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -51,6 +53,7 @@ app.get('/', (req, res) => {
       questions: '/api/questions',
       scores: '/api/scores',
       game: '/api/game',
+      users: '/api/users',
       health: '/api/health'
     }
   });
@@ -73,4 +76,4 @@ app.listen(PORT, () => {
   console.log(`📍 Health check: http://localhost:${PORT}/api/health`);
 });
 
-module.exports = app;
+export default app;

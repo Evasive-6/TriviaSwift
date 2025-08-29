@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
+import Question from '../models/Question.js';
 const router = express.Router();
-const Question = require('../models/Question');
 
 // GET /api/questions - Get all questions
 router.get('/', async (req, res, next) => {
@@ -196,4 +196,4 @@ router.delete('/:id', async (req, res, next) => {
   }
 });
 
-module.exports = router;
+export default router;
