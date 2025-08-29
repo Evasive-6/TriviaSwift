@@ -1,31 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs').promises;
-const path = require('path');
-
-// Path to questions data file
-const questionsFilePath = path.join(__dirname, '../data/questions.json');
-
-// Helper function to read questions
-const readQuestions = async () => {
-  try {
-    const data = await fs.readFile(questionsFilePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    // If file doesn't exist, return empty array
-    return [];
-  }
-};
-
-// Helper function to write questions
-const writeQuestions = async (questions) => {
-  await fs.writeFile(questionsFilePath, JSON.stringify(questions, null, 2));
-};
+const Question = require('../models/Question');
 
 // GET /api/questions - Get all questions
 router.get('/', async (req, res, next) => {
   try {
-    const questions = await readQuestions();
+    const questions = await Question.find().sort({ createdAt: -1 });
     res.json({
       success: true,
       count: questions.length,
@@ -39,8 +19,7 @@ router.get('/', async (req, res, next) => {
 // GET /api/questions/:id - Get question by ID
 router.get('/:id', async (req, res, next) => {
   try {
-    const questions = await readQuestions();
-    const question = questions.find(q => q.id === req.params.id);
+    const question = await Question.findById(req.params.id);
     
     if (!question) {
       return res.status(404).json({
@@ -61,10 +40,9 @@ router.get('/:id', async (req, res, next) => {
 // GET /api/questions/category/:category - Get questions by category
 router.get('/category/:category', async (req, res, next) => {
   try {
-    const questions = await readQuestions();
-    const categoryQuestions = questions.filter(q => 
-      q.category.toLowerCase() === req.params.category.toLowerCase()
-    );
+    const categoryQuestions = await Question.find({ 
+      category: new RegExp(req.params.category, 'i') 
+    }).sort({ createdAt: -1 });
     
     res.json({
       success: true,
@@ -81,18 +59,24 @@ router.get('/category/:category', async (req, res, next) => {
 router.get('/random/:count?', async (req, res, next) => {
   try {
     const count = parseInt(req.params.count) || 10;
-    const questions = await readQuestions();
+    const filters = {};
     
-    if (questions.length === 0) {
-      return res.status(404).json({
-        success: false,
-        error: 'No questions available'
-      });
+    // Add optional query filters
+    if (req.query.category) {
+      filters.category = new RegExp(req.query.category, 'i');
+    }
+    if (req.query.difficulty) {
+      filters.difficulty = req.query.difficulty.toLowerCase();
     }
     
-    // Shuffle and get random questions
-    const shuffled = [...questions].sort(() => 0.5 - Math.random());
-    const randomQuestions = shuffled.slice(0, Math.min(count, questions.length));
+    const randomQuestions = await Question.getRandomQuestions(count, filters);
+    
+    if (randomQuestions.length === 0) {
+      return res.status(404).json({
+        success: false,
+        error: 'No questions available matching your criteria'
+      });
+    }
     
     res.json({
       success: true,
@@ -107,7 +91,7 @@ router.get('/random/:count?', async (req, res, next) => {
 // POST /api/questions - Create new question
 router.post('/', async (req, res, next) => {
   try {
-    const { question, options, correctAnswer, category, difficulty } = req.body;
+    const { question, options, correctAnswer, category, difficulty, explanation } = req.body;
     
     // Basic validation
     if (!question || !options || !correctAnswer || !category || !difficulty) {
@@ -131,23 +115,81 @@ router.post('/', async (req, res, next) => {
       });
     }
     
-    const questions = await readQuestions();
-    const newQuestion = {
-      id: Date.now().toString(),
+    const newQuestion = await Question.create({
       question,
       options,
       correctAnswer,
       category,
       difficulty: difficulty.toLowerCase(),
-      createdAt: new Date().toISOString()
-    };
-    
-    questions.push(newQuestion);
-    await writeQuestions(questions);
+      explanation
+    });
     
     res.status(201).json({
       success: true,
       data: newQuestion
+    });
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      const errors = Object.values(error.errors).map(err => err.message);
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed',
+        details: errors
+      });
+    }
+    next(error);
+  }
+});
+
+// PUT /api/questions/:id - Update question
+router.put('/:id', async (req, res, next) => {
+  try {
+    const question = await Question.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+    
+    if (!question) {
+      return res.status(404).json({
+        success: false,
+        error: 'Question not found'
+      });
+    }
+    
+    res.json({
+      success: true,
+      data: question
+    });
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      const errors = Object.values(error.errors).map(err => err.message);
+      return res.status(400).json({
+        success: false,
+        error: 'Validation failed',
+        details: errors
+      });
+    }
+    next(error);
+  }
+});
+
+// DELETE /api/questions/:id - Delete question
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const question = await Question.findByIdAndDelete(req.params.id);
+    
+    if (!question) {
+      return res.status(404).json({
+        success: false,
+        error: 'Question not found'
+      });
+    }
+    
+    res.json({
+      success: true,
+      message: 'Question deleted successfully',
+      data: question
     });
   } catch (error) {
     next(error);

@@ -1,39 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs').promises;
-const path = require('path');
+const Score = require('../models/Score');
 
-// Path to scores data file
-const scoresFilePath = path.join(__dirname, '../data/scores.json');
-
-// Helper function to read scores
-const readScores = async () => {
-  try {
-    const data = await fs.readFile(scoresFilePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    // If file doesn't exist, return empty array
-    return [];
-  }
-};
-
-// Helper function to write scores
-const writeScores = async (scores) => {
-  await fs.writeFile(scoresFilePath, JSON.stringify(scores, null, 2));
-};
-
-// GET /api/scores - Get all scores
+// GET /api/scores - Get all scores sorted by score descending
 router.get('/', async (req, res, next) => {
   try {
-    const scores = await readScores();
-    
-    // Sort by score descending
-    const sortedScores = scores.sort((a, b) => b.score - a.score);
-    
+    const scores = await Score.find().sort({ score: -1, timestamp: -1 });
     res.json({
       success: true,
-      count: sortedScores.length,
-      data: sortedScores
+      count: scores.length,
+      data: scores
     });
   } catch (error) {
     next(error);
@@ -44,13 +20,7 @@ router.get('/', async (req, res, next) => {
 router.get('/top/:limit?', async (req, res, next) => {
   try {
     const limit = parseInt(req.params.limit) || 10;
-    const scores = await readScores();
-    
-    // Sort by score descending and take top N
-    const topScores = scores
-      .sort((a, b) => b.score - a.score)
-      .slice(0, limit);
-    
+    const topScores = await Score.getTopScores(limit);
     res.json({
       success: true,
       limit,
@@ -64,21 +34,13 @@ router.get('/top/:limit?', async (req, res, next) => {
 // GET /api/scores/player/:playerName - Get scores by player
 router.get('/player/:playerName', async (req, res, next) => {
   try {
-    const scores = await readScores();
-    const playerScores = scores.filter(score => 
-      score.playerName.toLowerCase() === req.params.playerName.toLowerCase()
-    );
-    
-    // Sort by date descending (most recent first)
-    const sortedScores = playerScores.sort((a, b) => 
-      new Date(b.timestamp) - new Date(a.timestamp)
-    );
-    
+    const playerName = req.params.playerName;
+    const playerScores = await Score.find({ playerName: new RegExp(playerName, 'i') }).sort({ timestamp: -1 });
     res.json({
       success: true,
-      player: req.params.playerName,
-      count: sortedScores.length,
-      data: sortedScores
+      player: playerName,
+      count: playerScores.length,
+      data: playerScores
     });
   } catch (error) {
     next(error);
@@ -88,9 +50,8 @@ router.get('/player/:playerName', async (req, res, next) => {
 // POST /api/scores - Submit new score
 router.post('/', async (req, res, next) => {
   try {
-    const { playerName, score, totalQuestions, correctAnswers, timeTaken, difficulty } = req.body;
+    const { playerName, score, totalQuestions, correctAnswers, timeTaken, difficulty, categories, questions } = req.body;
     
-    // Basic validation
     if (!playerName || score === undefined || totalQuestions === undefined || correctAnswers === undefined) {
       return res.status(400).json({
         success: false,
@@ -112,38 +73,36 @@ router.post('/', async (req, res, next) => {
       });
     }
     
-    const scores = await readScores();
-    const newScore = {
-      id: Date.now().toString(),
+    const newScore = await Score.create({
       playerName: playerName.trim(),
-      score: Math.max(0, score), // Ensure non-negative score
-      totalQuestions: Math.max(1, totalQuestions), // Ensure at least 1 question
-      correctAnswers: Math.max(0, Math.min(correctAnswers, totalQuestions)), // Clamp between 0 and totalQuestions
+      score: Math.max(0, score),
+      totalQuestions: Math.max(1, totalQuestions),
+      correctAnswers: Math.max(0, Math.min(correctAnswers, totalQuestions)),
       accuracy: Math.round((correctAnswers / totalQuestions) * 100),
       timeTaken: timeTaken || 0,
       difficulty: difficulty || 'medium',
-      timestamp: new Date().toISOString()
-    };
+      categories: categories || [],
+      questions: questions || []
+    });
     
-    scores.push(newScore);
-    await writeScores(scores);
+    // Calculate rank
+    const rank = await Score.countDocuments({ score: { $gt: newScore.score } }) + 1;
     
     res.status(201).json({
       success: true,
       data: newScore,
-      rank: scores.filter(s => s.score > newScore.score).length + 1
+      rank
     });
   } catch (error) {
     next(error);
   }
 });
 
-// GET /api/scores/stats - Get statistics
+// GET /api/scores/stats/summary - Get statistics summary
 router.get('/stats/summary', async (req, res, next) => {
   try {
-    const scores = await readScores();
-    
-    if (scores.length === 0) {
+    const totalGames = await Score.countDocuments();
+    if (totalGames === 0) {
       return res.json({
         success: true,
         message: 'No scores recorded yet',
@@ -156,17 +115,20 @@ router.get('/stats/summary', async (req, res, next) => {
       });
     }
     
-    const totalGames = scores.length;
-    const uniquePlayers = new Set(scores.map(score => score.playerName.toLowerCase())).size;
-    const averageScore = Math.round(scores.reduce((sum, score) => sum + score.score, 0) / totalGames);
-    const highestScore = Math.max(...scores.map(score => score.score));
+    const uniquePlayers = await Score.distinct('playerName').then(players => players.length);
+    const averageScoreAgg = await Score.aggregate([
+      { $group: { _id: null, avgScore: { $avg: '$score' } } }
+    ]);
+    const averageScore = averageScoreAgg[0]?.avgScore || 0;
+    const highestScoreDoc = await Score.findOne().sort({ score: -1 });
+    const highestScore = highestScoreDoc?.score || 0;
     
     res.json({
       success: true,
       data: {
         totalGames,
         totalPlayers: uniquePlayers,
-        averageScore,
+        averageScore: Math.round(averageScore),
         highestScore
       }
     });

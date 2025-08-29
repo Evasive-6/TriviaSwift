@@ -3,6 +3,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 
+// Import database connection
+const connectDB = require('./config/database');
+
 // Import routes
 const questionRoutes = require('./routes/questions');
 const scoreRoutes = require('./routes/scores');
@@ -13,6 +16,9 @@ const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Connect to MongoDB
+connectDB();
 
 // Middleware
 app.use(cors());
