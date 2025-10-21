@@ -1,11 +1,11 @@
 import express from 'express';
-import Question from '../models/Question.js';
+import question from '../models/Question.js';
 const router = express.Router();
 
 // GET /api/questions - Get all questions
 router.get('/', async (req, res, next) => {
   try {
-    const questions = await Question.find().sort({ createdAt: -1 });
+    const questions = await question.find().sort({ createdAt: -1 });
     res.json({
       success: true,
       count: questions.length,
@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
 // GET /api/questions/:id - Get question by ID
 router.get('/:id', async (req, res, next) => {
   try {
-    const question = await Question.findById(req.params.id);
+    const question = await question.findById(req.params.id);
     
     if (!question) {
       return res.status(404).json({
@@ -40,7 +40,7 @@ router.get('/:id', async (req, res, next) => {
 // GET /api/questions/category/:category - Get questions by category
 router.get('/category/:category', async (req, res, next) => {
   try {
-    const categoryQuestions = await Question.find({ 
+    const categoryQuestions = await question.find({ 
       category: new RegExp(req.params.category, 'i') 
     }).sort({ createdAt: -1 });
     
@@ -69,12 +69,12 @@ router.get('/random/:count?', async (req, res, next) => {
       filters.difficulty = req.query.difficulty.toLowerCase();
     }
     
-    const randomQuestions = await Question.getRandomQuestions(count, filters);
+    const randomQuestions = await question.getRandomQuestions(count, filters);
     
     if (randomQuestions.length === 0) {
       return res.status(404).json({
         success: false,
-        error: 'No questions available matching your criteria'
+        error: 'No Questions available matching your criteria'
       });
     }
     
@@ -97,7 +97,7 @@ router.post('/', async (req, res, next) => {
     if (!question || !options || !correctAnswer || !category || !difficulty) {
       return res.status(400).json({
         success: false,
-        error: 'Missing required fields: question, options, correctAnswer, category, difficulty'
+        error: 'Missing required fields: Question, options, correctAnswer, category, difficulty'
       });
     }
     
@@ -115,7 +115,7 @@ router.post('/', async (req, res, next) => {
       });
     }
     
-    const newQuestion = await Question.create({
+    const newQuestion = await question.create({
       question,
       options,
       correctAnswer,
@@ -144,7 +144,7 @@ router.post('/', async (req, res, next) => {
 // PUT /api/questions/:id - Update question
 router.put('/:id', async (req, res, next) => {
   try {
-    const question = await Question.findByIdAndUpdate(
+    const question = await question.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true, runValidators: true }
@@ -177,7 +177,7 @@ router.put('/:id', async (req, res, next) => {
 // DELETE /api/questions/:id - Delete question
 router.delete('/:id', async (req, res, next) => {
   try {
-    const question = await Question.findByIdAndDelete(req.params.id);
+    const question = await question.findByIdAndDelete(req.params.id);
     
     if (!question) {
       return res.status(404).json({
