@@ -74,8 +74,11 @@ Instant score feedback, real-time session data, and a persistent **leaderboard**
 - Authored and maintained this project README, ensuring clear, professional documentation for the team and future contributors
 
 ### **Navaneeth M**
-- Directed **QA and documentation standards**  
-- Authored internal guides (`QUICK_START.md`, `GAME_START_FIX.md`) and conducted structured testing  
+### Navaneeth M
+- Directed QA (Quality Assurance) and documentation, authoring markdown files (QUICK_START.md, GAME_START_FIX.md, etc.) detailing bug fixes, setup steps, and verification procedures.
+- Systematically tested error scenarios, cache invalidation fixes, and coordinated hard-refresh instructions for frontend state reliability.
+- Presented technical explanations and walkthroughs to external reviewers and peers.
+
 
 ***
 
