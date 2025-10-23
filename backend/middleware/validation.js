@@ -1,4 +1,4 @@
-import User from '../models/User.js';
+const User = require('../models/User');
 
 /**
  * Validation middleware for request data
@@ -259,7 +259,7 @@ const validateGameAnswer = (req, res, next) => {
   next();
 };
 
-export {
+module.exports = {
   validateUserRegistration,
   validateUserLogin,
   validateUserUpdate,

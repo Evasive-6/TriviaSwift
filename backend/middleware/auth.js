@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
 // Protect routes - verify JWT token
 const protect = async (req, res, next) => {
@@ -109,4 +109,4 @@ const authorize = (...roles) => {
   };
 };
 
-export { protect, generateToken, optionalAuth, authorize };
+module.exports = { protect, generateToken, optionalAuth, authorize };

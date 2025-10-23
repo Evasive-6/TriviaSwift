@@ -1,5 +1,4 @@
-import express from 'express';
-import question from '../models/Question.js';
+const express = require('express');
 const router = express.Router();
 
 const Question = require('../models/Question');
@@ -226,4 +225,4 @@ router.delete('/:id', async (req, res, next) => {
   }
 });
 
-export default router;
+module.exports = router;

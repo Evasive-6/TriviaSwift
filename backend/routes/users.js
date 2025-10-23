@@ -1,7 +1,7 @@
-import express from 'express';
-import User from '../models/User.js';
-import { validateUserRegistration, validateUserLogin, validateUserUpdate } from '../middleware/validation.js';
-import { generateToken, protect } from '../middleware/auth.js';
+const express = require('express');
+const User = require('../models/User');
+const { validateUserRegistration, validateUserLogin, validateUserUpdate } = require('../middleware/validation.js');
+const { generateToken, protect } = require('../middleware/auth.js');
 
 const router = express.Router();
 
@@ -109,4 +109,4 @@ router.put('/profile', protect, validateUserUpdate, async (req, res, next) => {
   }
 });
 
-export default router;
+module.exports = router;
