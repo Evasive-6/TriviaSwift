@@ -1,22 +1,6 @@
-const express = require('express');
+import express from 'express';
+import Score from '../models/Score.js';
 const router = express.Router();
-const Score = require('../models/Score');
-const fs = require('fs').promises;
-const path = require('path');
-const mongoose = require('mongoose');
-
-const scoresFilePath = path.join(__dirname, '../data/scores.json');
-
-// Helper function to read scores from file
-const readScoresFromFile = async () => {
-  try {
-    const data = await fs.readFile(scoresFilePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    console.log('Scores file not found, returning empty array');
-    return [];
-  }
-};
 
 // GET /api/scores - Get all scores sorted by score descending
 router.get('/', async (req, res, next) => {
@@ -214,4 +198,4 @@ router.get('/stats/summary', async (req, res, next) => {
   }
 });
 
-module.exports = router;
+export default router;

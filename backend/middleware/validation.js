@@ -1,6 +1,119 @@
+import User from '../models/User.js';
+
 /**
  * Validation middleware for request data
  */
+
+// Validate user registration
+const validateUserRegistration = async (req, res, next) => {
+  const { username, email, password } = req.body;
+  const errors = [];
+
+  // Username validation
+  if (!username || username.trim().length < 3) {
+    errors.push('Username must be at least 3 characters long');
+  } else if (username.length > 30) {
+    errors.push('Username cannot exceed 30 characters');
+  } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+    errors.push('Username can only contain letters, numbers, and underscores');
+  } else {
+    // Check if username already exists
+    const existingUser = await User.findOne({ username: username.toLowerCase() });
+    if (existingUser) {
+      errors.push('Username already exists');
+    }
+  }
+
+  // Email validation
+  if (!email || !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    errors.push('Please enter a valid email address');
+  } else {
+    // Check if email already exists
+    const existingEmail = await User.findOne({ email: email.toLowerCase() });
+    if (existingEmail) {
+      errors.push('Email already exists');
+    }
+  }
+
+  // Password validation
+  if (!password || password.length < 6) {
+    errors.push('Password must be at least 6 characters long');
+  }
+
+  if (errors.length > 0) {
+    return res.status(400).json({
+      success: false,
+      error: 'Validation failed',
+      details: errors
+    });
+  }
+
+  next();
+};
+
+// Validate user login
+const validateUserLogin = (req, res, next) => {
+  const { email, password } = req.body;
+  const errors = [];
+
+  if (!email || email.trim().length === 0) {
+    errors.push('Email is required');
+  }
+
+  if (!password || password.length === 0) {
+    errors.push('Password is required');
+  }
+
+  if (errors.length > 0) {
+    return res.status(400).json({
+      success: false,
+      error: 'Validation failed',
+      details: errors
+    });
+  }
+
+  next();
+};
+
+// Validate user update
+const validateUserUpdate = (req, res, next) => {
+  const { username, email, preferences } = req.body;
+  const errors = [];
+
+  if (username) {
+    if (username.trim().length < 3) {
+      errors.push('Username must be at least 3 characters long');
+    } else if (username.length > 30) {
+      errors.push('Username cannot exceed 30 characters');
+    } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+      errors.push('Username can only contain letters, numbers, and underscores');
+    }
+  }
+
+  if (email && !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    errors.push('Please enter a valid email address');
+  }
+
+  if (preferences) {
+    if (preferences.difficulty && !['easy', 'medium', 'hard', 'mixed'].includes(preferences.difficulty)) {
+      errors.push('Difficulty must be one of: easy, medium, hard, mixed');
+    }
+
+    if (preferences.questionCount && (preferences.questionCount < 5 || preferences.questionCount > 50)) {
+      errors.push('Question count must be between 5 and 50');
+    }
+  }
+
+  if (errors.length > 0) {
+    return res.status(400).json({
+      success: false,
+      error: 'Validation failed',
+      details: errors
+    });
+  }
+
+  next();
+};
 
 // Validate question creation
 const validateQuestion = (req, res, next) => {
@@ -146,7 +259,10 @@ const validateGameAnswer = (req, res, next) => {
   next();
 };
 
-module.exports = {
+export {
+  validateUserRegistration,
+  validateUserLogin,
+  validateUserUpdate,
   validateQuestion,
   validateScore,
   validateGameStart,

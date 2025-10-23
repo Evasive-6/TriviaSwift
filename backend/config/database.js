@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const connectDB = async () => {
   try {
@@ -14,7 +14,6 @@ const connectDB = async () => {
     });
 
     console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
-    console.log(`📊 Database: ${conn.connection.name}`);
 
     return conn;
   } catch (error) {
@@ -25,24 +24,4 @@ const connectDB = async () => {
   }
 };
 
-// Handle MongoDB connection events
-mongoose.connection.on('connected', () => {
-  console.log('📡 MongoDB connection established');
-});
-
-mongoose.connection.on('error', (err) => {
-  console.error('❌ MongoDB connection error:', err);
-});
-
-mongoose.connection.on('disconnected', () => {
-  console.log('⚠️  MongoDB connection disconnected');
-});
-
-// Graceful shutdown
-process.on('SIGINT', async () => {
-  await mongoose.connection.close();
-  console.log('👋 MongoDB connection closed through app termination');
-  process.exit(0);
-});
-
-module.exports = connectDB;
+export default connectDB;
