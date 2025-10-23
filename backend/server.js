@@ -1,19 +1,21 @@
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import path from 'path';
+require('dotenv').config();
+
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const path = require('path');
 
 // Import database connection
-import connectDB from './config/database.js';
+const connectDB = require('./config/database.js');
 
 // Import routes
-import questionRoutes from './routes/questions.js';
-import scoreRoutes from './routes/scores.js';
-import gameRoutes from './routes/game.js';
-import userRoutes from './routes/users.js';
+const questionRoutes = require('./routes/questions.js');
+const scoreRoutes = require('./routes/scores.js');
+const gameRoutes = require('./routes/game.js');
+const userRoutes = require('./routes/users.js');
 
 // Import middleware
-import errorHandler from './middleware/errorHandler.js';
+const errorHandler = require('./middleware/errorHandler.js');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -27,7 +29,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve static files (for potential frontend build)
-app.use(express.static(path.join(import.meta.dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // API Routes
 app.use('/api/questions', questionRoutes);
@@ -76,4 +78,4 @@ app.listen(PORT, () => {
   console.log(`📍 Health check: http://localhost:${PORT}/api/health`);
 });
 
-export default app;
+module.exports = app;
