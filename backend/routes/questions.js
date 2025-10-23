@@ -1,16 +1,43 @@
 const express = require('express');
 const router = express.Router();
 const Question = require('../models/Question');
+const fs = require('fs').promises;
+const path = require('path');
+const mongoose = require('mongoose');
+
+const questionsFilePath = path.join(__dirname, '../data/questions.json');
+
+// Helper function to read questions from file
+const readQuestionsFromFile = async () => {
+  try {
+    const data = await fs.readFile(questionsFilePath, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.log('Questions file not found, returning empty array');
+    return [];
+  }
+};
 
 // GET /api/questions - Get all questions
 router.get('/', async (req, res, next) => {
   try {
-    const questions = await Question.find().sort({ createdAt: -1 });
-    res.json({
-      success: true,
-      count: questions.length,
-      data: questions
-    });
+    // Try MongoDB first
+    if (mongoose.connection.readyState === 1) {
+      const questions = await Question.find().sort({ createdAt: -1 });
+      res.json({
+        success: true,
+        count: questions.length,
+        data: questions
+      });
+    } else {
+      // Fallback to file-based storage
+      const questions = await readQuestionsFromFile();
+      res.json({
+        success: true,
+        count: questions.length,
+        data: questions
+      });
+    }
   } catch (error) {
     next(error);
   }
