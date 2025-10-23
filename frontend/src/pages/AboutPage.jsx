@@ -117,15 +117,16 @@ const AboutPage = () => {
             TriviaSwift is an open-source project built to demonstrate modern web development practices.
             The codebase is available on GitHub for anyone to explore, contribute, or use as a learning resource.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="flex items-center justify-center px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+          <div className="flex justify-center">
+            <a
+              href="https://github.com/Evasive-6/TriviaSwift"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+            >
               <Github className="h-5 w-5 mr-2" />
               View Source Code
-            </button>
-            <button className="flex items-center justify-center px-6 py-3 bg-transparent border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
-              <ExternalLink className="h-5 w-5 mr-2" />
-              Documentation
-            </button>
+            </a>
           </div>
         </div>
 
