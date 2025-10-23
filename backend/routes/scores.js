@@ -5,12 +5,25 @@ const router = express.Router();
 // GET /api/scores - Get all scores sorted by score descending
 router.get('/', async (req, res, next) => {
   try {
-    const scores = await Score.find().sort({ score: -1, timestamp: -1 });
-    res.json({
-      success: true,
-      count: scores.length,
-      data: scores
-    });
+    // Try MongoDB first
+    if (mongoose.connection.readyState === 1) {
+      const scores = await Score.find().sort({ score: -1, timestamp: -1 });
+      res.json({
+        success: true,
+        count: scores.length,
+        data: scores
+      });
+    } else {
+      // Fallback to file-based storage
+      const scores = await readScoresFromFile();
+      // Sort by score descending
+      scores.sort((a, b) => b.score - a.score);
+      res.json({
+        success: true,
+        count: scores.length,
+        data: scores
+      });
+    }
   } catch (error) {
     next(error);
   }
@@ -20,12 +33,27 @@ router.get('/', async (req, res, next) => {
 router.get('/top/:limit?', async (req, res, next) => {
   try {
     const limit = parseInt(req.params.limit) || 10;
-    const topScores = await Score.getTopScores(limit);
-    res.json({
-      success: true,
-      limit,
-      data: topScores
-    });
+    // Try MongoDB first
+    if (mongoose.connection.readyState === 1) {
+      const topScores = await Score.getTopScores(limit);
+      res.json({
+        success: true,
+        limit,
+        data: topScores
+      });
+    } else {
+      // Fallback to file-based storage
+      const scores = await readScoresFromFile();
+      // Sort by score descending and take top limit
+      const topScores = scores
+        .sort((a, b) => b.score - a.score)
+        .slice(0, limit);
+      res.json({
+        success: true,
+        limit,
+        data: topScores
+      });
+    }
   } catch (error) {
     next(error);
   }
@@ -101,37 +129,70 @@ router.post('/', async (req, res, next) => {
 // GET /api/scores/stats/summary - Get statistics summary
 router.get('/stats/summary', async (req, res, next) => {
   try {
-    const totalGames = await Score.countDocuments();
-    if (totalGames === 0) {
-      return res.json({
+    // Try MongoDB first
+    if (mongoose.connection.readyState === 1) {
+      const totalGames = await Score.countDocuments();
+      if (totalGames === 0) {
+        return res.json({
+          success: true,
+          message: 'No scores recorded yet',
+          data: {
+            totalGames: 0,
+            totalPlayers: 0,
+            averageScore: 0,
+            highestScore: 0
+          }
+        });
+      }
+
+      const uniquePlayers = await Score.distinct('playerName').then(players => players.length);
+      const averageScoreAgg = await Score.aggregate([
+        { $group: { _id: null, avgScore: { $avg: '$score' } } }
+      ]);
+      const averageScore = averageScoreAgg[0]?.avgScore || 0;
+      const highestScoreDoc = await Score.findOne().sort({ score: -1 });
+      const highestScore = highestScoreDoc?.score || 0;
+
+      res.json({
         success: true,
-        message: 'No scores recorded yet',
         data: {
-          totalGames: 0,
-          totalPlayers: 0,
-          averageScore: 0,
-          highestScore: 0
+          totalGames,
+          totalPlayers: uniquePlayers,
+          averageScore: Math.round(averageScore),
+          highestScore
+        }
+      });
+    } else {
+      // Fallback to file-based storage
+      const scores = await readScoresFromFile();
+      if (scores.length === 0) {
+        return res.json({
+          success: true,
+          message: 'No scores recorded yet',
+          data: {
+            totalGames: 0,
+            totalPlayers: 0,
+            averageScore: 0,
+            highestScore: 0
+          }
+        });
+      }
+
+      const totalGames = scores.length;
+      const uniquePlayers = new Set(scores.map(s => s.playerName)).size;
+      const averageScore = scores.reduce((sum, s) => sum + s.score, 0) / scores.length;
+      const highestScore = Math.max(...scores.map(s => s.score));
+
+      res.json({
+        success: true,
+        data: {
+          totalGames,
+          totalPlayers: uniquePlayers,
+          averageScore: Math.round(averageScore),
+          highestScore
         }
       });
     }
-    
-    const uniquePlayers = await Score.distinct('playerName').then(players => players.length);
-    const averageScoreAgg = await Score.aggregate([
-      { $group: { _id: null, avgScore: { $avg: '$score' } } }
-    ]);
-    const averageScore = averageScoreAgg[0]?.avgScore || 0;
-    const highestScoreDoc = await Score.findOne().sort({ score: -1 });
-    const highestScore = highestScoreDoc?.score || 0;
-    
-    res.json({
-      success: true,
-      data: {
-        totalGames,
-        totalPlayers: uniquePlayers,
-        averageScore: Math.round(averageScore),
-        highestScore
-      }
-    });
   } catch (error) {
     next(error);
   }
