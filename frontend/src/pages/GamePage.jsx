@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Home } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useGame } from '../context/GameContext.jsx';
 import Header from '../components/Header.jsx';
 import QuestionCard from '../components/QuestionCard.jsx';
@@ -44,7 +45,7 @@ const GamePage = () => {
     setShowResult(false);
   }, [currentQuestion]);
 
-  const handleAnswerSelect = async (answer) => {
+  const handleAnswerSelect = useCallback(async (answer) => {
     if (isAnswering || showResult) return;
 
     setSelectedAnswer(answer);
@@ -52,18 +53,17 @@ const GamePage = () => {
 
     try {
       await submitAnswer(answer);
-      setShowResult(true);
+      // Automatically move to next question after a brief delay
+      setTimeout(() => {
+        setIsAnswering(false);
+        setSelectedAnswer(null);
+        setShowResult(false);
+      }, 500);
     } catch (error) {
       console.error('Error submitting answer:', error);
-    } finally {
       setIsAnswering(false);
     }
-  };
-
-  const handleNextQuestion = () => {
-    setShowResult(false);
-    setSelectedAnswer(null);
-  };
+  }, [isAnswering, showResult, submitAnswer]);
 
   const handleEndGame = () => {
     resetGame();
@@ -99,93 +99,116 @@ const GamePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen quiz-background">
       <Header />
 
-      <div className="container mx-auto px-4 py-6">
-        {/* Game Header */}
-        <div className="flex items-center justify-between mb-6">
-          <button
-            onClick={handleGoHome}
-            className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            <ArrowLeft className="h-5 w-5 mr-1" />
-            Home
-          </button>
-
-          <div className="flex items-center text-gray-600">
-            <Clock className="h-5 w-5 mr-1" />
-            <span>{Math.floor(timeElapsed / 60)}:{(timeElapsed % 60).toString().padStart(2, '0')}</span>
-          </div>
-        </div>
-
-        {/* Score Board */}
-        <ScoreBoard
-          score={score}
-          correctAnswers={correctAnswers}
-          totalQuestions={totalQuestions}
-          currentQuestion={currentQuestionIndex}
-          timeElapsed={timeElapsed}
-        />
-
-        {/* Question Card */}
-        <div className="mb-6">
-          {isLoading ? (
-            <div className="flex justify-center py-12">
-              <LoadingSpinner size="large" text="Loading question..." />
-            </div>
-          ) : currentQuestion ? (
-            <QuestionCard
-              question={currentQuestion}
-              options={currentQuestion.options}
-              onAnswerSelect={handleAnswerSelect}
-              selectedAnswer={selectedAnswer}
-              showResult={showResult}
-              correctAnswer={currentQuestion.correctAnswer}
-            />
-          ) : (
-            <div className="bg-white rounded-xl shadow-lg p-12 text-center">
-              <p className="text-gray-600">Loading question...</p>
-            </div>
-          )}
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex justify-center space-x-4">
-          {showResult && currentQuestionIndex < totalQuestions && (
+        <div className="container mx-auto px-4 py-6">
+          {/* Game Header */}
+          <div className="flex items-center justify-between mb-6 animate-fade-in-up">
             <button
-              onClick={handleNextQuestion}
-              className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+              onClick={handleGoHome}
+              className="flex items-center text-slate-700 hover:text-slate-900 transition-all duration-300 glass-morphism px-4 py-2 rounded-xl hover:shadow-lg hover-lift font-['Inter'] font-semibold"
             >
-              Next Question
+              <ArrowLeft className="h-5 w-5 mr-2" />
+              <span>Home</span>
             </button>
-          )}
 
-          <button
-            onClick={handleEndGame}
-            className="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors"
-          >
-            End Game
-          </button>
-        </div>
-
-        {/* Error Display */}
-        {error && (
-          <div className="mt-6 max-w-2xl mx-auto">
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
-              <p className="font-medium">Error</p>
-              <p className="text-sm">{error}</p>
+            <div className="flex items-center text-slate-700 glass-morphism px-4 py-2 rounded-xl shadow-lg">
+              <Clock className="h-5 w-5 mr-2 text-indigo-500" />
+              <span className="font-black text-lg font-['Space_Grotesk']">
+                {Math.floor(timeElapsed / 60)}:{(timeElapsed % 60).toString().padStart(2, '0')}
+              </span>
             </div>
           </div>
-        )}
 
-        {/* Loading Overlay */}
-        {isAnswering && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <LoadingSpinner text="Submitting answer..." />
+          {/* Score Board */}
+          <div className="mb-6 animate-slide-in-right">
+            <ScoreBoard
+              score={score}
+              correctAnswers={correctAnswers}
+              totalQuestions={totalQuestions}
+              currentQuestion={currentQuestionIndex}
+              timeElapsed={timeElapsed}
+            />
           </div>
-        )}
-      </div>
+
+          {/* Question Card */}
+          <div className="mb-6">
+            <AnimatePresence mode="wait">
+              {isLoading ? (
+                <motion.div 
+                  key="loading"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="flex justify-center py-12"
+                >
+                  <div className="glass-morphism rounded-2xl shadow-lg p-8 animate-pulse-slow">
+                    <LoadingSpinner size="large" text="Loading question..." />
+                  </div>
+                </motion.div>
+              ) : currentQuestion ? (
+                <motion.div
+                  key={currentQuestion.id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <QuestionCard
+                    question={currentQuestion}
+                    options={currentQuestion.options}
+                    onAnswerSelect={handleAnswerSelect}
+                    selectedAnswer={selectedAnswer}
+                    showResult={showResult}
+                    correctAnswer={currentQuestion.correctAnswer}
+                    currentQuestionIndex={currentQuestionIndex}
+                    totalQuestions={totalQuestions}
+                  />
+                </motion.div>
+              ) : (
+                <motion.div 
+                  key="no-question"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="glass-morphism rounded-2xl shadow-lg p-8 text-center animate-fade-in-up"
+                >
+                  <p className="text-slate-600 text-lg font-['Inter']">Loading question...</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex justify-center animate-fade-in-up">
+            <button
+              onClick={handleEndGame}
+              className="bg-gradient-to-r from-slate-500 to-slate-600 text-white px-6 py-3 rounded-xl font-bold text-lg hover:from-slate-600 hover:to-slate-700 transition-all duration-300 hover-lift shadow-lg font-['Poppins']"
+            >
+              End Game
+            </button>
+          </div>
+
+          {/* Error Display */}
+          {error && (
+            <div className="mt-6 max-w-xl mx-auto animate-slide-in-right">
+              <div className="bg-gradient-to-r from-rose-100 to-red-100 border-2 border-rose-400 text-rose-700 px-6 py-4 rounded-xl shadow-lg">
+                <p className="font-bold text-lg font-['Poppins']">Error</p>
+                <p className="text-sm mt-1 font-['Inter']">{error}</p>
+              </div>
+            </div>
+          )}
+
+          {/* Loading Overlay */}
+          {isAnswering && (
+            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+              <div className="glass-morphism rounded-2xl shadow-lg p-8 animate-pulse-slow">
+                <LoadingSpinner text="Submitting answer..." />
+              </div>
+            </div>
+          )}
+        </div>
     </div>
   );
 };

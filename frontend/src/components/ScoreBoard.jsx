@@ -20,46 +20,54 @@ const ScoreBoard = ({
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+    <div className="glass-morphism rounded-2xl shadow-lg p-6 mb-6 hover-lift">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {/* Score */}
-        <div className="text-center">
+        <div className="text-center group">
           <div className="flex items-center justify-center mb-2">
-            <Trophy className="h-5 w-5 text-yellow-500 mr-1" />
-            <span className="text-sm font-medium text-gray-600">Score</span>
+            <div className="p-2 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-xl group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <Trophy className="h-5 w-5 text-white" />
+            </div>
           </div>
-          <div className="text-2xl font-bold text-gray-900">{score}</div>
+          <div className="text-xs font-bold text-slate-600 mb-1 font-['Inter'] uppercase tracking-wide">Score</div>
+          <div className="text-2xl font-black text-slate-900 group-hover:text-yellow-600 transition-colors duration-300 font-['Space_Grotesk']">{score}</div>
         </div>
 
         {/* Correct Answers */}
-        <div className="text-center">
+        <div className="text-center group">
           <div className="flex items-center justify-center mb-2">
-            <Target className="h-5 w-5 text-green-500 mr-1" />
-            <span className="text-sm font-medium text-gray-600">Correct</span>
+            <div className="p-2 bg-gradient-to-r from-emerald-400 to-green-400 rounded-xl group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <Target className="h-5 w-5 text-white" />
+            </div>
           </div>
-          <div className="text-2xl font-bold text-gray-900">
+          <div className="text-xs font-bold text-slate-600 mb-1 font-['Inter'] uppercase tracking-wide">Correct</div>
+          <div className="text-2xl font-black text-slate-900 group-hover:text-emerald-600 transition-colors duration-300 font-['Space_Grotesk']">
             {correctAnswers}/{totalQuestions}
           </div>
         </div>
 
         {/* Accuracy */}
-        <div className="text-center">
+        <div className="text-center group">
           <div className="flex items-center justify-center mb-2">
-            <TrendingUp className="h-5 w-5 text-blue-500 mr-1" />
-            <span className="text-sm font-medium text-gray-600">Accuracy</span>
+            <div className="p-2 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-xl group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <TrendingUp className="h-5 w-5 text-white" />
+            </div>
           </div>
-          <div className="text-2xl font-bold text-gray-900">
+          <div className="text-xs font-bold text-slate-600 mb-1 font-['Inter'] uppercase tracking-wide">Accuracy</div>
+          <div className="text-2xl font-black text-slate-900 group-hover:text-indigo-600 transition-colors duration-300 font-['Space_Grotesk']">
             {calculatedAccuracy.toFixed(0)}%
           </div>
         </div>
 
         {/* Time */}
-        <div className="text-center">
+        <div className="text-center group">
           <div className="flex items-center justify-center mb-2">
-            <Clock className="h-5 w-5 text-purple-500 mr-1" />
-            <span className="text-sm font-medium text-gray-600">Time</span>
+            <div className="p-2 bg-gradient-to-r from-violet-400 to-purple-400 rounded-xl group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <Clock className="h-5 w-5 text-white" />
+            </div>
           </div>
-          <div className="text-2xl font-bold text-gray-900">
+          <div className="text-xs font-bold text-slate-600 mb-1 font-['Inter'] uppercase tracking-wide">Time</div>
+          <div className="text-2xl font-black text-slate-900 group-hover:text-violet-600 transition-colors duration-300 font-['Space_Grotesk']">
             {formatTime(timeElapsed)}
           </div>
         </div>
@@ -68,14 +76,14 @@ const ScoreBoard = ({
       {/* Progress Bar */}
       <div className="mt-6">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium text-gray-600">Progress</span>
-          <span className="text-sm font-medium text-gray-600">
+          <span className="text-sm font-bold text-slate-700 font-['Inter']">Progress</span>
+          <span className="text-sm font-bold text-slate-700 font-['Inter']">
             {currentQuestion} / {totalQuestions}
           </span>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-3">
+        <div className="w-full bg-slate-200/50 rounded-full h-3 overflow-hidden backdrop-blur-sm">
           <div
-            className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-300 ease-out"
+            className="progress-bar h-full rounded-full shadow-lg"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -83,15 +91,15 @@ const ScoreBoard = ({
 
       {/* Performance Indicator */}
       {calculatedAccuracy > 0 && (
-        <div className="mt-4 flex justify-center">
-          <div className={`px-3 py-1 rounded-full text-sm font-medium ${
+        <div className="mt-4 flex justify-center animate-fade-in-up">
+          <div className={`px-4 py-2 rounded-xl text-sm font-bold shadow-lg font-['Poppins'] ${
             calculatedAccuracy >= 80
-              ? 'bg-green-100 text-green-800'
+              ? 'bg-gradient-to-r from-emerald-400 to-green-500 text-white animate-pulse-slow'
               : calculatedAccuracy >= 60
-              ? 'bg-yellow-100 text-yellow-800'
-              : 'bg-red-100 text-red-800'
+              ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-white'
+              : 'bg-gradient-to-r from-rose-400 to-red-500 text-white'
           }`}>
-            {calculatedAccuracy >= 80 ? 'Excellent!' : calculatedAccuracy >= 60 ? 'Good Job!' : 'Keep Trying!'}
+            {calculatedAccuracy >= 80 ? '🏆 Excellent!' : calculatedAccuracy >= 60 ? '👍 Great Job!' : '💪 Keep Improving!'}
           </div>
         </div>
       )}

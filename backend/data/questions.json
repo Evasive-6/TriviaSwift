@@ -538,5 +538,365 @@
     "category": "Literature",
     "difficulty": "medium",
     "createdAt": "2024-01-15T14:55:00.000Z"
+  },
+  {
+    "id": "61",
+    "question": "Who painted 'The Starry Night'?",
+    "options": ["Vincent van Gogh", "Pablo Picasso", "Claude Monet", "Salvador Dalí"],
+    "correctAnswer": "Vincent van Gogh",
+    "category": "Art",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:00:00.000Z"
+  },
+  {
+    "id": "62",
+    "question": "What is the Mona Lisa?",
+    "options": ["A sculpture", "A painting", "A building", "A song"],
+    "correctAnswer": "A painting",
+    "category": "Art",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:01:00.000Z"
+  },
+  {
+    "id": "63",
+    "question": "Which art movement is Pablo Picasso associated with?",
+    "options": ["Impressionism", "Cubism", "Surrealism", "Baroque"],
+    "correctAnswer": "Cubism",
+    "category": "Art",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T15:02:00.000Z"
+  },
+  {
+    "id": "64",
+    "question": "What is the name of Michelangelo's famous sculpture of David?",
+    "options": ["David", "Moses", "Pieta", "The Thinker"],
+    "correctAnswer": "David",
+    "category": "Art",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T15:03:00.000Z"
+  },
+  {
+    "id": "65",
+    "question": "Which museum houses the Mona Lisa?",
+    "options": ["The Louvre", "The Met", "The Uffizi", "The British Museum"],
+    "correctAnswer": "The Louvre",
+    "category": "Art",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:04:00.000Z"
+  },
+  {
+    "id": "66",
+    "question": "What is the capital of Australia?",
+    "options": ["Sydney", "Melbourne", "Canberra", "Perth"],
+    "correctAnswer": "Canberra",
+    "category": "General Knowledge",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:05:00.000Z"
+  },
+  {
+    "id": "67",
+    "question": "How many days are in a leap year?",
+    "options": ["365", "366", "364", "367"],
+    "correctAnswer": "366",
+    "category": "General Knowledge",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:06:00.000Z"
+  },
+  {
+    "id": "68",
+    "question": "What is the largest planet in our solar system?",
+    "options": ["Earth", "Saturn", "Jupiter", "Neptune"],
+    "correctAnswer": "Jupiter",
+    "category": "General Knowledge",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:07:00.000Z"
+  },
+  {
+    "id": "69",
+    "question": "What is the smallest country in the world?",
+    "options": ["Monaco", "Vatican City", "Liechtenstein", "San Marino"],
+    "correctAnswer": "Vatican City",
+    "category": "General Knowledge",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T15:08:00.000Z"
+  },
+  {
+    "id": "70",
+    "question": "Who wrote 'Romeo and Juliet'?",
+    "options": ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"],
+    "correctAnswer": "William Shakespeare",
+    "category": "Literature",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:09:00.000Z"
+  },
+  {
+    "id": "71",
+    "question": "What is the first book in the Harry Potter series?",
+    "options": ["The Chamber of Secrets", "The Philosopher's Stone", "The Goblet of Fire", "The Prisoner of Azkaban"],
+    "correctAnswer": "The Philosopher's Stone",
+    "category": "Literature",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:10:00.000Z"
+  },
+  {
+    "id": "72",
+    "question": "Who wrote '1984'?",
+    "options": ["George Orwell", "Aldous Huxley", "Ray Bradbury", "H.G. Wells"],
+    "correctAnswer": "George Orwell",
+    "category": "Literature",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T15:11:00.000Z"
+  },
+  {
+    "id": "73",
+    "question": "What is the name of the main character in 'The Great Gatsby'?",
+    "options": ["Nick Carraway", "Jay Gatsby", "Tom Buchanan", "Daisy Buchanan"],
+    "correctAnswer": "Jay Gatsby",
+    "category": "Literature",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T15:12:00.000Z"
+  },
+  {
+    "id": "74",
+    "question": "Who wrote 'Pride and Prejudice'?",
+    "options": ["Charlotte Brontë", "Jane Austen", "Emily Brontë", "Virginia Woolf"],
+    "correctAnswer": "Jane Austen",
+    "category": "Literature",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:13:00.000Z"
+  },
+  {
+    "id": "75",
+    "question": "What is the longest river in the world?",
+    "options": ["Amazon", "Nile", "Mississippi", "Yangtze"],
+    "correctAnswer": "Nile",
+    "category": "Geography",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:14:00.000Z"
+  },
+  {
+    "id": "76",
+    "question": "Which country has the most natural lakes?",
+    "options": ["Russia", "Canada", "Finland", "United States"],
+    "correctAnswer": "Canada",
+    "category": "Geography",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T15:15:00.000Z"
+  },
+  {
+    "id": "77",
+    "question": "What is the highest mountain in Africa?",
+    "options": ["Mount Kenya", "Mount Kilimanjaro", "Mount Meru", "Mount Elgon"],
+    "correctAnswer": "Mount Kilimanjaro",
+    "category": "Geography",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:16:00.000Z"
+  },
+  {
+    "id": "78",
+    "question": "Which ocean is the largest?",
+    "options": ["Atlantic", "Indian", "Pacific", "Arctic"],
+    "correctAnswer": "Pacific",
+    "category": "Geography",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:17:00.000Z"
+  },
+  {
+    "id": "79",
+    "question": "What is the smallest continent?",
+    "options": ["Europe", "Australia", "Antarctica", "South America"],
+    "correctAnswer": "Australia",
+    "category": "Geography",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:18:00.000Z"
+  },
+  {
+    "id": "80",
+    "question": "Which element has the chemical symbol 'Au'?",
+    "options": ["Silver", "Gold", "Aluminum", "Arsenic"],
+    "correctAnswer": "Gold",
+    "category": "Science",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:19:00.000Z"
+  },
+  {
+    "id": "81",
+    "question": "What is the speed of light?",
+    "options": ["300,000 km/s", "150,000 km/s", "450,000 km/s", "600,000 km/s"],
+    "correctAnswer": "300,000 km/s",
+    "category": "Science",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T15:20:00.000Z"
+  },
+  {
+    "id": "82",
+    "question": "What is the chemical formula for water?",
+    "options": ["H2O", "CO2", "NaCl", "O2"],
+    "correctAnswer": "H2O",
+    "category": "Science",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:21:00.000Z"
+  },
+  {
+    "id": "83",
+    "question": "Which gas makes up most of Earth's atmosphere?",
+    "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Argon"],
+    "correctAnswer": "Nitrogen",
+    "category": "Science",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T15:22:00.000Z"
+  },
+  {
+    "id": "84",
+    "question": "What is the hardest natural substance?",
+    "options": ["Gold", "Iron", "Diamond", "Quartz"],
+    "correctAnswer": "Diamond",
+    "category": "Science",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:23:00.000Z"
+  },
+  {
+    "id": "85",
+    "question": "Who was the first person to walk on the moon?",
+    "options": ["Buzz Aldrin", "Neil Armstrong", "John Glenn", "Alan Shepard"],
+    "correctAnswer": "Neil Armstrong",
+    "category": "History",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:24:00.000Z"
+  },
+  {
+    "id": "86",
+    "question": "In which year did World War II end?",
+    "options": ["1944", "1945", "1946", "1947"],
+    "correctAnswer": "1945",
+    "category": "History",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:25:00.000Z"
+  },
+  {
+    "id": "87",
+    "question": "Who was the first President of the United States?",
+    "options": ["John Adams", "George Washington", "Thomas Jefferson", "Benjamin Franklin"],
+    "correctAnswer": "George Washington",
+    "category": "History",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:26:00.000Z"
+  },
+  {
+    "id": "88",
+    "question": "What was the name of the ship that brought the Pilgrims to America?",
+    "options": ["Mayflower", "Santa Maria", "Endeavour", "Discovery"],
+    "correctAnswer": "Mayflower",
+    "category": "History",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T15:27:00.000Z"
+  },
+  {
+    "id": "89",
+    "question": "In which year did the Berlin Wall fall?",
+    "options": ["1987", "1988", "1989", "1990"],
+    "correctAnswer": "1989",
+    "category": "History",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T15:28:00.000Z"
+  },
+  {
+    "id": "90",
+    "question": "What is the largest organ in the human body?",
+    "options": ["Liver", "Brain", "Skin", "Lungs"],
+    "correctAnswer": "Skin",
+    "category": "Science",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T15:29:00.000Z"
+  },
+  {
+    "id": "91",
+    "question": "What is the name of the process by which plants convert sunlight into energy?",
+    "options": ["Respiration", "Photosynthesis", "Transpiration", "Fermentation"],
+    "correctAnswer": "Photosynthesis",
+    "category": "Science",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T15:30:00.000Z"
+  },
+  {
+    "id": "92",
+    "question": "Which ancient wonder was located in Alexandria?",
+    "options": ["Hanging Gardens", "Colossus of Rhodes", "Lighthouse of Alexandria", "Temple of Artemis"],
+    "correctAnswer": "Lighthouse of Alexandria",
+    "category": "History",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T15:31:00.000Z"
+  },
+  {
+    "id": "93",
+    "question": "What is the name of the painting technique used by Leonardo da Vinci in the Mona Lisa?",
+    "options": ["Impasto", "Sfumato", "Chiaroscuro", "Tenebrism"],
+    "correctAnswer": "Sfumato",
+    "category": "Art",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T15:32:00.000Z"
+  },
+  {
+    "id": "94",
+    "question": "Which novel begins with the line 'It was the best of times, it was the worst of times'?",
+    "options": ["Great Expectations", "A Tale of Two Cities", "Oliver Twist", "David Copperfield"],
+    "correctAnswer": "A Tale of Two Cities",
+    "category": "Literature",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T15:33:00.000Z"
+  },
+  {
+    "id": "95",
+    "question": "What is the deepest point in the world's oceans?",
+    "options": ["Mariana Trench", "Puerto Rico Trench", "Java Trench", "Tonga Trench"],
+    "correctAnswer": "Mariana Trench",
+    "category": "Geography",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T15:34:00.000Z"
+  },
+  {
+    "id": "96",
+    "question": "What is the chemical symbol for tungsten?",
+    "options": ["W", "Tg", "Tu", "Tw"],
+    "correctAnswer": "W",
+    "category": "Science",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T15:35:00.000Z"
+  },
+  {
+    "id": "97",
+    "question": "Which country has the most time zones?",
+    "options": ["Russia", "United States", "China", "Brazil"],
+    "correctAnswer": "Russia",
+    "category": "General Knowledge",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T15:36:00.000Z"
+  },
+  {
+    "id": "98",
+    "question": "What is the name of the longest river in Asia?",
+    "options": ["Yangtze", "Ganges", "Mekong", "Indus"],
+    "correctAnswer": "Yangtze",
+    "category": "Geography",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T15:37:00.000Z"
+  },
+  {
+    "id": "99",
+    "question": "Which element has the highest melting point?",
+    "options": ["Tungsten", "Carbon", "Iron", "Platinum"],
+    "correctAnswer": "Tungsten",
+    "category": "Science",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T15:38:00.000Z"
+  },
+  {
+    "id": "100",
+    "question": "What is the name of the painting by Edvard Munch that depicts a figure screaming?",
+    "options": ["The Scream", "The Cry", "The Shout", "The Wail"],
+    "correctAnswer": "The Scream",
+    "category": "Art",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T15:39:00.000Z"
   }
 ]

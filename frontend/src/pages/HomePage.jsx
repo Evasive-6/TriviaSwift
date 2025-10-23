@@ -54,38 +54,38 @@ const HomePage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+    <div className="min-h-screen quiz-background">
       {/* Hero Section */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">TriviaSwift</span>
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center mb-8 animate-fade-in-up">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">TriviaSwift</span>
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-700 mb-6 max-w-2xl mx-auto leading-relaxed">
             Challenge yourself with our exciting trivia game! Test your knowledge across multiple categories and compete for the highest score.
           </p>
 
           {/* Quick Stats */}
           {statistics && (
-            <div className="flex justify-center space-x-8 mb-8">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600">{statistics.totalGames || 0}</div>
-                <div className="text-sm text-gray-600">Games Played</div>
+            <div className="flex justify-center space-x-8 mb-6 animate-slide-in-right">
+              <div className="text-center group">
+                <div className="text-2xl font-bold text-indigo-500 group-hover:scale-110 transition-transform duration-300">{statistics.totalGames || 0}</div>
+                <div className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Games Played</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600">{statistics.totalPlayers || 0}</div>
-                <div className="text-sm text-gray-600">Players</div>
+              <div className="text-center group">
+                <div className="text-2xl font-bold text-purple-500 group-hover:scale-110 transition-transform duration-300">{statistics.totalPlayers || 0}</div>
+                <div className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Players</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-green-600">{statistics.highestScore || 0}</div>
-                <div className="text-sm text-gray-600">High Score</div>
+              <div className="text-center group">
+                <div className="text-2xl font-bold text-orange-500 group-hover:scale-110 transition-transform duration-300">{statistics.highestScore || 0}</div>
+                <div className="text-xs font-semibold text-gray-600 uppercase tracking-wide">High Score</div>
               </div>
             </div>
           )}
         </div>
 
         {/* Game Settings */}
-        <div className="max-w-md mx-auto mb-12">
+        <div className="max-w-md mx-auto mb-8 animate-fade-in-up">
           <GameSettings
             settings={gameSettings}
             onSettingsChange={updateGameSettings}
@@ -95,30 +95,37 @@ const HomePage = () => {
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div key={index} className="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <div key={index} className="glass-morphism rounded-xl shadow-lg p-4 text-center hover-lift group animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <Icon className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600 text-sm">{feature.description}</p>
+                <h3 className="text-sm font-bold text-slate-900 mb-2 font-['Poppins']">{feature.title}</h3>
+                <p className="text-xs text-slate-600 leading-relaxed font-['Inter']">{feature.description}</p>
               </div>
             );
           })}
         </div>
 
         {/* Quick Actions */}
-        <div className="text-center">
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="text-center animate-fade-in-up">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={() => navigate('/leaderboard')}
-              className="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg font-semibold hover:from-yellow-600 hover:to-orange-600 transition-colors"
+              className="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-xl font-bold text-sm hover:from-yellow-500 hover:to-orange-600 transition-all duration-300 hover-lift shadow-lg"
             >
-              <Trophy className="h-5 w-5 mr-2" />
+              <Trophy className="h-4 w-4 mr-2" />
               View Leaderboard
+            </button>
+            <button
+              onClick={() => navigate('/about')}
+              className="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-600 text-white rounded-xl font-bold text-sm hover:from-gray-600 hover:to-gray-700 transition-all duration-300 hover-lift shadow-lg"
+            >
+              <BarChart3 className="h-4 w-4 mr-2" />
+              Learn More
             </button>
           </div>
         </div>
@@ -126,10 +133,10 @@ const HomePage = () => {
 
       {/* Error Display */}
       {error && (
-        <div className="fixed bottom-4 right-4 max-w-sm">
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
-            <p className="font-medium">Error</p>
-            <p className="text-sm">{error}</p>
+        <div className="fixed bottom-6 right-6 max-w-sm animate-slide-in-right">
+          <div className="bg-red-100 border-2 border-red-400 text-red-700 px-6 py-4 rounded-2xl shadow-lg">
+            <p className="font-bold text-lg">Error</p>
+            <p className="text-sm mt-1">{error}</p>
           </div>
         </div>
       )}

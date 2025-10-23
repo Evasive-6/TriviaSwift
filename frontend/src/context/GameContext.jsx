@@ -71,7 +71,7 @@ function gameReducer(state, action) {
         currentGame: action.payload,
         gameStatus: 'playing',
         currentQuestion: action.payload.question,
-        currentQuestionIndex: 1,
+        currentQuestionIndex: 0,
         totalQuestions: action.payload.totalQuestions,
         score: 0,
         correctAnswers: 0,

@@ -20,20 +20,51 @@ router.post('/start', async (req, res, next) => {
     }
     
     // Get questions from MongoDB
-    let questions;
+    let questions = [];
     if (mongoose.connection.readyState === 1) {
       // MongoDB is connected - use database
-      const query = {};
       
-      // Add filters if not 'mixed'
+      // First, try to get questions with exact filters
+      const exactQuery = {};
       if (difficulty && difficulty.toLowerCase() !== 'mixed') {
-        query.difficulty = difficulty.toLowerCase();
+        exactQuery.difficulty = difficulty.toLowerCase();
       }
       if (category && category.toLowerCase() !== 'mixed') {
-        query.category = category;
+        exactQuery.category = category;
       }
       
-      questions = await Question.find(query);
+      questions = await Question.find(exactQuery);
+      
+      // If we don't have enough questions with exact filters, try partial filters
+      if (questions.length < questionCount) {
+        console.log(`Only found ${questions.length} questions with exact filters, trying partial filters...`);
+        
+        const partialQuery = {};
+        if (difficulty && difficulty.toLowerCase() !== 'mixed') {
+          partialQuery.difficulty = difficulty.toLowerCase();
+        }
+        
+        const partialQuestions = await Question.find(partialQuery);
+        if (partialQuestions.length > questions.length) {
+          questions = partialQuestions;
+        }
+        
+        // If still not enough, get questions from any category but same difficulty
+        if (questions.length < questionCount && difficulty && difficulty.toLowerCase() !== 'mixed') {
+          const difficultyQuestions = await Question.find({ difficulty: difficulty.toLowerCase() });
+          if (difficultyQuestions.length > questions.length) {
+            questions = difficultyQuestions;
+          }
+        }
+        
+        // If still not enough, get any questions
+        if (questions.length < questionCount) {
+          const allQuestions = await Question.find({});
+          if (allQuestions.length > questions.length) {
+            questions = allQuestions;
+          }
+        }
+      }
     } else {
       // Fallback to empty array if MongoDB not connected
       questions = [];
@@ -46,8 +77,18 @@ router.post('/start', async (req, res, next) => {
       });
     }
     
-    // Shuffle and select questions (MongoDB already filtered)
-    const shuffledQuestions = [...questions].sort(() => 0.5 - Math.random());
+    // Proper Fisher-Yates shuffle algorithm
+    const shuffleArray = (array) => {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    };
+    
+    // Shuffle and select questions
+    const shuffledQuestions = shuffleArray(questions);
     const selectedQuestions = shuffledQuestions.slice(0, Math.min(questionCount, questions.length));
     
     // Create game session
@@ -81,7 +122,7 @@ router.post('/start', async (req, res, next) => {
       success: true,
       gameId,
       totalQuestions: selectedQuestions.length,
-      currentQuestion: 1,
+      currentQuestion: 0,
       question: questionToSend
     });
   } catch (error) {
@@ -162,7 +203,7 @@ router.post('/answer', async (req, res, next) => {
     res.json({
       success: true,
       gameComplete: false,
-      currentQuestion: gameSession.currentQuestionIndex + 1,
+      currentQuestion: gameSession.currentQuestionIndex,
       totalQuestions: gameSession.questions.length,
       score: gameSession.score,
       correctAnswers: gameSession.correctAnswers,
