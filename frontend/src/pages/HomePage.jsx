@@ -9,6 +9,7 @@ const HomePage = () => {
   const navigate = useNavigate();
   const {
     gameStatus,
+    gameSettings,
     statistics,
     isLoading,
     error,
@@ -86,12 +87,7 @@ const HomePage = () => {
         {/* Game Settings */}
         <div className="max-w-md mx-auto mb-12">
           <GameSettings
-            settings={{
-              playerName: '',
-              questionCount: 10,
-              difficulty: 'mixed',
-              category: 'mixed'
-            }}
+            settings={gameSettings}
             onSettingsChange={updateGameSettings}
             onStartGame={handleStartGame}
             loading={isLoading}
@@ -123,13 +119,6 @@ const HomePage = () => {
             >
               <Trophy className="h-5 w-5 mr-2" />
               View Leaderboard
-            </button>
-            <button
-              onClick={() => navigate('/stats')}
-              className="flex items-center justify-center px-6 py-3 bg-gray-600 text-white rounded-lg font-semibold hover:bg-gray-700 transition-colors"
-            >
-              <BarChart3 className="h-5 w-5 mr-2" />
-              View Statistics
             </button>
           </div>
         </div>

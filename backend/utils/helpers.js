@@ -60,7 +60,7 @@ const isValidCategory = (category) => {
   return typeof category === 'string' && category.trim().length > 0;
 };
 
-export {
+module.exports = {
   formatDate,
   isValidEmail,
   sanitizeInput,
