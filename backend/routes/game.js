@@ -1,21 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs').promises;
-const path = require('path');
-
-// Path to questions data file
-const questionsFilePath = path.join(__dirname, '../data/questions.json');
-
-// Helper function to read questions
-const readQuestions = async () => {
-  try {
-    const data = await fs.readFile(questionsFilePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    // If file doesn't exist, return empty array
-    return [];
-  }
-};
+const Question = require('../models/Question');
+const mongoose = require('mongoose');
 
 // In-memory game sessions (for demo purposes)
 // In production, you'd want to use a proper database
@@ -33,7 +19,25 @@ router.post('/start', async (req, res, next) => {
       });
     }
     
-    const questions = await readQuestions();
+    // Get questions from MongoDB
+    let questions;
+    if (mongoose.connection.readyState === 1) {
+      // MongoDB is connected - use database
+      const query = {};
+      
+      // Add filters if not 'mixed'
+      if (difficulty && difficulty.toLowerCase() !== 'mixed') {
+        query.difficulty = difficulty.toLowerCase();
+      }
+      if (category && category.toLowerCase() !== 'mixed') {
+        query.category = category;
+      }
+      
+      questions = await Question.find(query);
+    } else {
+      // Fallback to empty array if MongoDB not connected
+      questions = [];
+    }
     
     if (questions.length === 0) {
       return res.status(404).json({
@@ -42,29 +46,9 @@ router.post('/start', async (req, res, next) => {
       });
     }
     
-    // Filter questions based on difficulty and category if provided
-    let filteredQuestions = questions;
-    if (difficulty) {
-      filteredQuestions = filteredQuestions.filter(q => 
-        q.difficulty.toLowerCase() === difficulty.toLowerCase()
-      );
-    }
-    if (category) {
-      filteredQuestions = filteredQuestions.filter(q => 
-        q.category.toLowerCase() === category.toLowerCase()
-      );
-    }
-    
-    if (filteredQuestions.length === 0) {
-      return res.status(404).json({
-        success: false,
-        error: 'No questions match the specified criteria'
-      });
-    }
-    
-    // Shuffle and select questions
-    const shuffledQuestions = [...filteredQuestions].sort(() => 0.5 - Math.random());
-    const selectedQuestions = shuffledQuestions.slice(0, Math.min(questionCount, filteredQuestions.length));
+    // Shuffle and select questions (MongoDB already filtered)
+    const shuffledQuestions = [...questions].sort(() => 0.5 - Math.random());
+    const selectedQuestions = shuffledQuestions.slice(0, Math.min(questionCount, questions.length));
     
     // Create game session
     const gameId = Date.now().toString();
@@ -86,7 +70,7 @@ router.post('/start', async (req, res, next) => {
     // Return first question
     const currentQuestion = selectedQuestions[0];
     const questionToSend = {
-      id: currentQuestion.id,
+      id: currentQuestion._id || currentQuestion.id,
       question: currentQuestion.question,
       options: currentQuestion.options,
       category: currentQuestion.category,
@@ -166,7 +150,7 @@ router.post('/answer', async (req, res, next) => {
     // Get next question
     const nextQuestion = gameSession.questions[gameSession.currentQuestionIndex];
     const questionToSend = {
-      id: nextQuestion.id,
+      id: nextQuestion._id || nextQuestion.id,
       question: nextQuestion.question,
       options: nextQuestion.options,
       category: nextQuestion.category,

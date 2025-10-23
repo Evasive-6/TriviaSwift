@@ -48,9 +48,9 @@ router.get('/', async (req, res, next) => {
 // GET /api/questions/:id - Get question by ID
 router.get('/:id', async (req, res, next) => {
   try {
-    const question = await question.findById(req.params.id);
+    const foundQuestion = await Question.findById(req.params.id);
     
-    if (!question) {
+    if (!foundQuestion) {
       return res.status(404).json({
         success: false,
         error: 'Question not found'
@@ -59,7 +59,7 @@ router.get('/:id', async (req, res, next) => {
     
     res.json({
       success: true,
-      data: question
+      data: foundQuestion
     });
   } catch (error) {
     next(error);
@@ -69,7 +69,7 @@ router.get('/:id', async (req, res, next) => {
 // GET /api/questions/category/:category - Get questions by category
 router.get('/category/:category', async (req, res, next) => {
   try {
-    const categoryQuestions = await question.find({ 
+    const categoryQuestions = await Question.find({ 
       category: new RegExp(req.params.category, 'i') 
     }).sort({ createdAt: -1 });
     
@@ -98,7 +98,7 @@ router.get('/random/:count?', async (req, res, next) => {
       filters.difficulty = req.query.difficulty.toLowerCase();
     }
     
-    const randomQuestions = await question.getRandomQuestions(count, filters);
+    const randomQuestions = await Question.getRandomQuestions(count, filters);
     
     if (randomQuestions.length === 0) {
       return res.status(404).json({
@@ -144,7 +144,7 @@ router.post('/', async (req, res, next) => {
       });
     }
     
-    const newQuestion = await question.create({
+    const newQuestion = await Question.create({
       question,
       options,
       correctAnswer,
@@ -173,13 +173,13 @@ router.post('/', async (req, res, next) => {
 // PUT /api/questions/:id - Update question
 router.put('/:id', async (req, res, next) => {
   try {
-    const question = await question.findByIdAndUpdate(
+    const updatedQuestion = await Question.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true, runValidators: true }
     );
     
-    if (!question) {
+    if (!updatedQuestion) {
       return res.status(404).json({
         success: false,
         error: 'Question not found'
@@ -188,7 +188,7 @@ router.put('/:id', async (req, res, next) => {
     
     res.json({
       success: true,
-      data: question
+      data: updatedQuestion
     });
   } catch (error) {
     if (error.name === 'ValidationError') {
@@ -206,9 +206,9 @@ router.put('/:id', async (req, res, next) => {
 // DELETE /api/questions/:id - Delete question
 router.delete('/:id', async (req, res, next) => {
   try {
-    const question = await question.findByIdAndDelete(req.params.id);
+    const deletedQuestion = await Question.findByIdAndDelete(req.params.id);
     
-    if (!question) {
+    if (!deletedQuestion) {
       return res.status(404).json({
         success: false,
         error: 'Question not found'
@@ -218,7 +218,7 @@ router.delete('/:id', async (req, res, next) => {
     res.json({
       success: true,
       message: 'Question deleted successfully',
-      data: question
+      data: deletedQuestion
     });
   } catch (error) {
     next(error);

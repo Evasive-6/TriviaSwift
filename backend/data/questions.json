@@ -133,5 +133,410 @@
     "category": "History",
     "difficulty": "hard",
     "createdAt": "2024-01-15T11:10:00.000Z"
+  },
+  {
+    "id": "16",
+    "question": "What is the tallest mountain in the world?",
+    "options": ["K2", "Mount Everest", "Kangchenjunga", "Lhotse"],
+    "correctAnswer": "Mount Everest",
+    "category": "Geography",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T11:15:00.000Z"
+  },
+  {
+    "id": "17",
+    "question": "How many continents are there?",
+    "options": ["5", "6", "7", "8"],
+    "correctAnswer": "7",
+    "category": "Geography",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T11:20:00.000Z"
+  },
+  {
+    "id": "18",
+    "question": "What is the speed of light?",
+    "options": ["299,792 km/s", "150,000 km/s", "500,000 km/s", "1,000,000 km/s"],
+    "correctAnswer": "299,792 km/s",
+    "category": "Science",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T11:25:00.000Z"
+  },
+  {
+    "id": "19",
+    "question": "What is the smallest planet in our solar system?",
+    "options": ["Mercury", "Mars", "Venus", "Pluto"],
+    "correctAnswer": "Mercury",
+    "category": "Science",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T11:30:00.000Z"
+  },
+  {
+    "id": "20",
+    "question": "Who wrote 'The Great Gatsby'?",
+    "options": ["Ernest Hemingway", "F. Scott Fitzgerald", "John Steinbeck", "Mark Twain"],
+    "correctAnswer": "F. Scott Fitzgerald",
+    "category": "Literature",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T11:35:00.000Z"
+  },
+  {
+    "id": "21",
+    "question": "In which year did World War I begin?",
+    "options": ["1912", "1914", "1916", "1918"],
+    "correctAnswer": "1914",
+    "category": "History",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T11:40:00.000Z"
+  },
+  {
+    "id": "22",
+    "question": "What is the longest river in the world?",
+    "options": ["Amazon River", "Nile River", "Yangtze River", "Mississippi River"],
+    "correctAnswer": "Nile River",
+    "category": "Geography",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T11:45:00.000Z"
+  },
+  {
+    "id": "23",
+    "question": "Who painted 'The Starry Night'?",
+    "options": ["Pablo Picasso", "Vincent van Gogh", "Claude Monet", "Salvador Dali"],
+    "correctAnswer": "Vincent van Gogh",
+    "category": "Art",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T11:50:00.000Z"
+  },
+  {
+    "id": "24",
+    "question": "What is the chemical formula for water?",
+    "options": ["H2O", "CO2", "O2", "H2O2"],
+    "correctAnswer": "H2O",
+    "category": "Science",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T11:55:00.000Z"
+  },
+  {
+    "id": "25",
+    "question": "How many bones are in the human body?",
+    "options": ["186", "206", "226", "246"],
+    "correctAnswer": "206",
+    "category": "Science",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T12:00:00.000Z"
+  },
+  {
+    "id": "26",
+    "question": "What is the capital of Italy?",
+    "options": ["Milan", "Rome", "Venice", "Florence"],
+    "correctAnswer": "Rome",
+    "category": "Geography",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T12:05:00.000Z"
+  },
+  {
+    "id": "27",
+    "question": "Who developed the theory of relativity?",
+    "options": ["Isaac Newton", "Nikola Tesla", "Albert Einstein", "Stephen Hawking"],
+    "correctAnswer": "Albert Einstein",
+    "category": "Science",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T12:10:00.000Z"
+  },
+  {
+    "id": "28",
+    "question": "What is the largest desert in the world?",
+    "options": ["Sahara Desert", "Arabian Desert", "Antarctic Desert", "Gobi Desert"],
+    "correctAnswer": "Antarctic Desert",
+    "category": "Geography",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T12:15:00.000Z"
+  },
+  {
+    "id": "29",
+    "question": "Who wrote '1984'?",
+    "options": ["Aldous Huxley", "George Orwell", "Ray Bradbury", "H.G. Wells"],
+    "correctAnswer": "George Orwell",
+    "category": "Literature",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T12:20:00.000Z"
+  },
+  {
+    "id": "30",
+    "question": "What year did the Titanic sink?",
+    "options": ["1910", "1912", "1914", "1916"],
+    "correctAnswer": "1912",
+    "category": "History",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T12:25:00.000Z"
+  },
+  {
+    "id": "31",
+    "question": "What is the largest organ in the human body?",
+    "options": ["Heart", "Liver", "Skin", "Brain"],
+    "correctAnswer": "Skin",
+    "category": "Science",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T12:30:00.000Z"
+  },
+  {
+    "id": "32",
+    "question": "Who was the first president of the United States?",
+    "options": ["Thomas Jefferson", "George Washington", "John Adams", "Benjamin Franklin"],
+    "correctAnswer": "George Washington",
+    "category": "History",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T12:35:00.000Z"
+  },
+  {
+    "id": "33",
+    "question": "What is the smallest country in the world?",
+    "options": ["Monaco", "San Marino", "Vatican City", "Liechtenstein"],
+    "correctAnswer": "Vatican City",
+    "category": "Geography",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T12:40:00.000Z"
+  },
+  {
+    "id": "34",
+    "question": "How many teeth does an adult human have?",
+    "options": ["28", "30", "32", "34"],
+    "correctAnswer": "32",
+    "category": "Science",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T12:45:00.000Z"
+  },
+  {
+    "id": "35",
+    "question": "Who sculpted the statue of David?",
+    "options": ["Leonardo da Vinci", "Michelangelo", "Donatello", "Raphael"],
+    "correctAnswer": "Michelangelo",
+    "category": "Art",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T12:50:00.000Z"
+  },
+  {
+    "id": "36",
+    "question": "What is the freezing point of water in Celsius?",
+    "options": ["0°C", "32°C", "-10°C", "100°C"],
+    "correctAnswer": "0°C",
+    "category": "Science",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T12:55:00.000Z"
+  },
+  {
+    "id": "37",
+    "question": "In which country are the pyramids of Giza located?",
+    "options": ["Mexico", "Egypt", "Peru", "Sudan"],
+    "correctAnswer": "Egypt",
+    "category": "Geography",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T13:00:00.000Z"
+  },
+  {
+    "id": "38",
+    "question": "What is the powerhouse of the cell?",
+    "options": ["Nucleus", "Mitochondria", "Ribosome", "Golgi Apparatus"],
+    "correctAnswer": "Mitochondria",
+    "category": "Science",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T13:05:00.000Z"
+  },
+  {
+    "id": "39",
+    "question": "Who wrote 'Harry Potter'?",
+    "options": ["J.R.R. Tolkien", "C.S. Lewis", "J.K. Rowling", "Roald Dahl"],
+    "correctAnswer": "J.K. Rowling",
+    "category": "Literature",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T13:10:00.000Z"
+  },
+  {
+    "id": "40",
+    "question": "What is the largest planet in our solar system?",
+    "options": ["Saturn", "Jupiter", "Neptune", "Uranus"],
+    "correctAnswer": "Jupiter",
+    "category": "Science",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T13:15:00.000Z"
+  },
+  {
+    "id": "41",
+    "question": "In which year did Christopher Columbus discover America?",
+    "options": ["1492", "1500", "1488", "1510"],
+    "correctAnswer": "1492",
+    "category": "History",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T13:20:00.000Z"
+  },
+  {
+    "id": "42",
+    "question": "What is the capital of Spain?",
+    "options": ["Barcelona", "Madrid", "Seville", "Valencia"],
+    "correctAnswer": "Madrid",
+    "category": "Geography",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T13:25:00.000Z"
+  },
+  {
+    "id": "43",
+    "question": "How many minutes are in a full week?",
+    "options": ["10,080", "8,640", "11,520", "9,600"],
+    "correctAnswer": "10,080",
+    "category": "General Knowledge",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T13:30:00.000Z"
+  },
+  {
+    "id": "44",
+    "question": "What is the chemical symbol for silver?",
+    "options": ["Si", "Ag", "Au", "Sr"],
+    "correctAnswer": "Ag",
+    "category": "Science",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T13:35:00.000Z"
+  },
+  {
+    "id": "45",
+    "question": "Who painted the Sistine Chapel ceiling?",
+    "options": ["Leonardo da Vinci", "Raphael", "Michelangelo", "Caravaggio"],
+    "correctAnswer": "Michelangelo",
+    "category": "Art",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T13:40:00.000Z"
+  },
+  {
+    "id": "46",
+    "question": "What is the capital of Canada?",
+    "options": ["Toronto", "Vancouver", "Ottawa", "Montreal"],
+    "correctAnswer": "Ottawa",
+    "category": "Geography",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T13:45:00.000Z"
+  },
+  {
+    "id": "47",
+    "question": "How many planets are in our solar system?",
+    "options": ["7", "8", "9", "10"],
+    "correctAnswer": "8",
+    "category": "Science",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T13:50:00.000Z"
+  },
+  {
+    "id": "48",
+    "question": "Who wrote 'Pride and Prejudice'?",
+    "options": ["Charlotte Bronte", "Emily Bronte", "Jane Austen", "Mary Shelley"],
+    "correctAnswer": "Jane Austen",
+    "category": "Literature",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T13:55:00.000Z"
+  },
+  {
+    "id": "49",
+    "question": "What is the boiling point of water in Fahrenheit?",
+    "options": ["100°F", "180°F", "212°F", "250°F"],
+    "correctAnswer": "212°F",
+    "category": "Science",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T14:00:00.000Z"
+  },
+  {
+    "id": "50",
+    "question": "In which continent is the Sahara Desert located?",
+    "options": ["Asia", "Africa", "Australia", "South America"],
+    "correctAnswer": "Africa",
+    "category": "Geography",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T14:05:00.000Z"
+  },
+  {
+    "id": "51",
+    "question": "What is the square root of 144?",
+    "options": ["10", "11", "12", "13"],
+    "correctAnswer": "12",
+    "category": "General Knowledge",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T14:10:00.000Z"
+  },
+  {
+    "id": "52",
+    "question": "Who was the first man to walk on the moon?",
+    "options": ["Buzz Aldrin", "Neil Armstrong", "Yuri Gagarin", "Michael Collins"],
+    "correctAnswer": "Neil Armstrong",
+    "category": "History",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T14:15:00.000Z"
+  },
+  {
+    "id": "53",
+    "question": "What gas do plants absorb from the atmosphere?",
+    "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+    "correctAnswer": "Carbon Dioxide",
+    "category": "Science",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T14:20:00.000Z"
+  },
+  {
+    "id": "54",
+    "question": "How many sides does a hexagon have?",
+    "options": ["5", "6", "7", "8"],
+    "correctAnswer": "6",
+    "category": "General Knowledge",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T14:25:00.000Z"
+  },
+  {
+    "id": "55",
+    "question": "What is the largest country in the world by area?",
+    "options": ["Canada", "China", "Russia", "United States"],
+    "correctAnswer": "Russia",
+    "category": "Geography",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T14:30:00.000Z"
+  },
+  {
+    "id": "56",
+    "question": "Who invented the telephone?",
+    "options": ["Thomas Edison", "Alexander Graham Bell", "Nikola Tesla", "Benjamin Franklin"],
+    "correctAnswer": "Alexander Graham Bell",
+    "category": "History",
+    "difficulty": "easy",
+    "createdAt": "2024-01-15T14:35:00.000Z"
+  },
+  {
+    "id": "57",
+    "question": "What is the primary language spoken in Brazil?",
+    "options": ["Spanish", "Portuguese", "French", "English"],
+    "correctAnswer": "Portuguese",
+    "category": "Geography",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T14:40:00.000Z"
+  },
+  {
+    "id": "58",
+    "question": "What is the symbol for potassium?",
+    "options": ["P", "Pt", "K", "Po"],
+    "correctAnswer": "K",
+    "category": "Science",
+    "difficulty": "hard",
+    "createdAt": "2024-01-15T14:45:00.000Z"
+  },
+  {
+    "id": "59",
+    "question": "In which year did the Berlin Wall fall?",
+    "options": ["1987", "1989", "1991", "1993"],
+    "correctAnswer": "1989",
+    "category": "History",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T14:50:00.000Z"
+  },
+  {
+    "id": "60",
+    "question": "Who wrote 'The Odyssey'?",
+    "options": ["Virgil", "Homer", "Sophocles", "Euripides"],
+    "correctAnswer": "Homer",
+    "category": "Literature",
+    "difficulty": "medium",
+    "createdAt": "2024-01-15T14:55:00.000Z"
   }
 ]
