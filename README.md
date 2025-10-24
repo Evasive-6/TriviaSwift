@@ -227,14 +227,3 @@ The project serves as a testament to effective teamwork, attention to detail, an
 
 This project is developed as an academic work for educational purposes.
 
-***
-
-## 📞 Support
-
-For questions, bug reports, or feature requests, please contact the development team or refer to the documentation files listed above.
-
-***
-
-**Last Updated:** October 24, 2025  
-**Version:** 1.0.0  
-**QA Status:** ✅ Verified and Approved for Submission
